@@ -10,5 +10,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     end
     assert_response :unprocessable_entity
     assert_template 'users/new'
+    assert_select 'div#error_explanation'
+    assert_select 'div.alert.alert-danger'
   end
 end
