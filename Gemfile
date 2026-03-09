@@ -73,3 +73,7 @@ group :test do
   gem "guard-minitest"
   gem "rails-controller-testing"
 end
+
+group :production do
+  gem "pg", "1.3.5"
+end
