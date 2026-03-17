@@ -175,3 +175,12 @@ input {
 .dropdown-menu.active {
   display: block;
 }
+
+@media (max-width: 800px) {
+  .navbar-right {
+    float: none;
+  }
+  .navbar-nav {
+    margin: 0;
+  }
+}
