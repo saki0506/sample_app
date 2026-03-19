@@ -20,6 +20,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit                              # ← これを追加！
+    @user = User.find(params[:id])
+  end
+
   private
 
     def user_params
