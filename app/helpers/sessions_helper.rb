@@ -2,6 +2,7 @@ module SessionsHelper
   # 渡されたユーザーでログインする
   def log_in(user)
     session[:user_id] = user.id
+    session[:session_token] = user.session_token  # ← 追加！
   end
 
   # 永続的セッションのためにユーザーをデータベースに記憶する
@@ -14,7 +15,10 @@ module SessionsHelper
   # 現在ログインしているユーザーを返す（いる場合）
   def current_user
     if (user_id = session[:user_id])
-      @current_user ||= User.find_by(id: user_id)
+      user = User.find_by(id: user_id)
+      if user && session[:session_token] == user.session_token  # ← 変更！
+        @current_user = user
+      end
     elsif (user_id = cookies.encrypted[:user_id])
       user = User.find_by(id: user_id)
       if user && user.authenticated?(cookies[:remember_token])
